@@ -1,8 +1,8 @@
 import { Webhook } from "svix";
 import { headers } from "next/headers";
 import { WebhookEvent } from "@clerk/nextjs/server";
-import { db } from "@/app/lib/db";
-import { JsonObject } from "@prisma/client/runtime/library";
+import { clerkClient } from "@clerk/nextjs";
+import { createUser } from "@/app/lib/actions/userAction";
 
 export async function POST(req: Request) {
   const WEBHOOK_SECRET = process.env.WEBHOOK_SECRET;
@@ -58,15 +58,16 @@ export async function POST(req: Request) {
       photo: image_url,
     };
 
-    await db.user.upsert({
-      where: { externalId: id },
-      create: {
-        externalId: id as string,
-        username: username as string,
-        attributes: attributes as unknown as JsonObject,
-      },
-      update: { attributes: attributes as unknown as JsonObject },
-    });
+    const newUser = await createUser(user);
+
+    // Set public metadata
+    if (newUser) {
+      await clerkClient.users.updateUserMetadata(id, {
+        publicMetadata: {
+          userId: newUser.id,
+        },
+      });
+    }
   }
-  return new Response("", { status: 200 });
+  return new Response("OK", { status: 200 });
 }
