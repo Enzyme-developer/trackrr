@@ -1,10 +1,10 @@
 import React, { HTMLAttributes, forwardRef } from "react";
 import { cva } from "class-variance-authority";
 import type { VariantProps } from "class-variance-authority";
-import { cn } from "../lib/utils";
+import { cn } from "../../lib/utils";
 
 const paragraphVariant = cva(
-  ["text-purple-600", "max-w-prose", "text-center", "mb-1"],
+  "text-black max-w-prose mb-1",
   {
     variants: {
       size: {
