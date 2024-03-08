@@ -1,3 +1,13 @@
+// ====== USER PARAMS
+declare type CreateUserParams = {
+  clerkId: string;
+  email: string;
+  username: string;
+  firstName: string;
+  lastName: string;
+  photo: string;
+};
+
 export type User = {
   email: string;
 };
