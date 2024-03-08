@@ -3,11 +3,13 @@ import SearchBar from "../components/SearchBar";
 import { ArrowRightCircleIcon } from "lucide-react";
 import Heading from "../components/reusables/Heading";
 import Paragraph from "../components/reusables/Paragraph";
+import Navbar from "../components/Navbar";
 
 export default async function Search() {
 
   return (
     <>
+      <Navbar />
       <section className="px-6 md:px-20 py-24 mt-6">
         <div className="flex max-xl:flex-col items-center justify-between gap-16">
           <div className="w-full flex flex-col space-y-8 justify-center">
