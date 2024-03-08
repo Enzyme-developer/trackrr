@@ -80,15 +80,13 @@ export async function generateEmailBody(
   return { subject, body };
 }
 
+// Gmail SMTP configuration
 const transporter = nodemailer.createTransport({
-  pool: true,
   service: "gmail",
-  port: 2525,
   auth: {
-    user: "talabiayomide2000@gmail.com",
+    user: "boxmatchup@gmail.com",
     pass: process.env.EMAIL_PASSWORD,
   },
-  maxConnections: 1,
 });
 
 export const sendEmail = async (
